@@ -2,11 +2,10 @@
 const multipleAnswers = JSON.parse(process.env.MULTIPLE_ANSWERS)
 const singleAnswers = JSON.parse(process.env.SINGLE_ANSWERS)
 
-console.log(`multipleAnswers`, multipleAnswers, `singleAnswers`, singleAnswers)
-
 module.exports = (req, res) => {
   if (req.method.toUpperCase() === 'POST') {
-    console.log(req)
+    console.log(`multipleAnswers`, multipleAnswers, `singleAnswers`, singleAnswers)
+    console.log(JSON.stringify(req.body))
     const { multiple, single } = req.body
     let score = 0
     for (const [answer, index] of multipleAnswers.entries()) {
