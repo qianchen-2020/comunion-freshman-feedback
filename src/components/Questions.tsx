@@ -1,4 +1,4 @@
-import { defineComponent, reactive, ref } from 'vue'
+import { defineComponent, reactive } from 'vue'
 import questions from '../data/questions'
 
 const choiceChars = ['A', 'B', 'C', 'D']
