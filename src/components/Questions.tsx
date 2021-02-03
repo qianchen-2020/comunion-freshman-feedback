@@ -36,8 +36,8 @@ export default defineComponent({
           // })
           // const { score, passed } = await resp.json()
           // alert((passed ? `😃 恭喜通过新人考核!` : '🤭 抱歉，你并没有通过新人考核！') + `得分：${score}`)
-          // passed && props.onDone?.()
-          props.onDone?.()
+          // passed && props.onDone?.(score)
+          props.onDone?.(1)
         } catch (error) {
           console.error(error)
           alert('请求错误')

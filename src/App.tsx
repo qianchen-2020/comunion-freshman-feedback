@@ -12,13 +12,18 @@ export default defineComponent({
     const collectVisible = ref(false)
     const done = ref(false)
 
+    const score = ref(0)
+
     return () => (
       <>
         <Header />
         {(() => {
           if (done.value) return <Done />
-          if (collectVisible.value) return <Collect onDone={() => (done.value = true)} />
-          if (learned.value) return <Questions onDone={() => (collectVisible.value = true)} />
+          if (collectVisible.value) return <Collect score={score.value} onDone={() => (done.value = true)} />
+          if (learned.value) return <Questions onDone={(_score: number) => {
+            score.value = _score
+            collectVisible.value = true
+          }} />
           return <LearnInfo onDone={() => (learned.value = true)} />
         })()}
       </>
