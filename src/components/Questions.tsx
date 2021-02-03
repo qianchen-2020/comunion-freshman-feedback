@@ -26,17 +26,18 @@ export default defineComponent({
       }
       if (window.confirm('确认不再检查一遍了么？')) {
         try {
-          const resp = await fetch('/api/answer', {
-            method: 'POST',
-            headers: {
-              Accept: 'application/json',
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ multiple: multipleChoices, single: singleChoices })
-          })
-          const { score, passed } = await resp.json()
-          alert((passed ? `😃 恭喜通过新人考核!` : '🤭 抱歉，你并没有通过新人考核！') + `得分：${score}`)
-          passed && props.onDone?.()
+          // const resp = await fetch('/api/answer', {
+          //   method: 'POST',
+          //   headers: {
+          //     Accept: 'application/json',
+          //     'Content-Type': 'application/json'
+          //   },
+          //   body: JSON.stringify({ multiple: multipleChoices, single: singleChoices })
+          // })
+          // const { score, passed } = await resp.json()
+          // alert((passed ? `😃 恭喜通过新人考核!` : '🤭 抱歉，你并没有通过新人考核！') + `得分：${score}`)
+          // passed && props.onDone?.()
+          props.onDone?.()
         } catch (error) {
           console.error(error)
           alert('请求错误')
@@ -57,8 +58,8 @@ export default defineComponent({
               <div class="mt-2">
                 {question.choices.map((choice, cIndex) => (
                   <label class="flex mb-1">
-                    <input type="checkbox" class="form-checkbox mt-1" value={cIndex} v-model={multipleChoices[index]} />
-                    <span class="ml-2 leading-5 text-base text-gray-600">
+                    <input type="checkbox" class="mt-1 text-blue-500" value={cIndex} v-model={multipleChoices[index]} />
+                    <span class="ml-2 text-base text-gray-600">
                       {choiceChars[cIndex]}. {choice}
                     </span>
                   </label>
@@ -75,8 +76,8 @@ export default defineComponent({
               <div class="mt-2">
                 {question.choices.map((choice, cIndex) => (
                   <label class="flex mb-1">
-                    <input type="radio" class="form-checkbox mt-1" value={cIndex} v-model={singleChoices[index]} />
-                    <span class="ml-2 leading-5 text-base text-gray-600">
+                    <input type="radio" class="mt-1 text-blue-500" value={cIndex} v-model={singleChoices[index]} />
+                    <span class="ml-2 text-base text-gray-600">
                       {choiceChars[cIndex]}. {choice}
                     </span>
                   </label>

@@ -17,8 +17,8 @@ export default defineComponent({
         <Header />
         {(() => {
           if (done.value) return <Done />
-          if (collectVisible.value) return <Collect />
-          if (learned.value) return <Questions />
+          if (collectVisible.value) return <Collect onDone={() => (done.value = true)} />
+          if (learned.value) return <Questions onDone={() => (collectVisible.value = true)} />
           return <LearnInfo onDone={() => (learned.value = true)} />
         })()}
       </>
