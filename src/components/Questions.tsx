@@ -35,7 +35,7 @@ export default defineComponent({
             body: JSON.stringify({ multiple: multipleChoices, single: singleChoices })
           })
           const { score, passed } = await resp.json()
-          alert(passed ? '😃 恭喜通过新人考核!' : '🤭 抱歉，你并没有通过新人考核！')
+          alert((passed ? `😃 恭喜通过新人考核!` : '🤭 抱歉，你并没有通过新人考核！') + `得分：${score}`)
           passed && props.onDone?.()
         } catch (error) {
           console.error(error)

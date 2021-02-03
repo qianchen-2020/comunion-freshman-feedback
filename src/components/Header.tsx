@@ -4,7 +4,7 @@ import HeaderImage from '../assets/header.png'
 export default defineComponent({
   name: 'Header',
   props: {},
-  setup(props, ctx) {
+  setup() {
     return () => (
       <div>
         <h1 class="mb-4 text-gray-600 text-center text-2xl">Comunion Economics</h1>
