@@ -8,14 +8,14 @@ module.exports = (req, res) => {
     console.log(JSON.stringify(req.body))
     const { multiple, single } = req.body
     let score = 0
-    for (const [answer, index] of multipleAnswers.entries()) {
+    for (const [index, answer] of multipleAnswers.entries()) {
       console.log(`multiple ${answer} ${multiple[index]}`)
       if (answer[0].length === multiple[index].length && answer[0].every(item => multiple[index].indexOf(item) > -1)) {
         score += answer[1]
         console.log(`multiple +score ${score} ${answer[1]}`)
       }
     }
-    for (const [answer, index] of singleAnswers.entries()) {
+    for (const [index, answer] of singleAnswers.entries()) {
       console.log(`single ${answer} ${single[index]}`)
       if (answer[0] === single[index]) {
         score += answer[1]
