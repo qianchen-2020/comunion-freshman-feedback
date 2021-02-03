@@ -4,8 +4,7 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
 module.exports = (req, res) => {
   if (req.method.toUpperCase() === 'POST') {
-    const { mentor, nickname, score, nickname,
-    mentor,
+    const { mentor, nickname, score,
     shimo,
     taiga,
     yapi,
