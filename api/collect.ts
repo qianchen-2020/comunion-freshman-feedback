@@ -16,7 +16,7 @@ export default function (req: NowRequest, res: NowResponse) {
       })
       .then(() => {
         console.log('Email sent')
-        res.status(200).end()
+        res.send({ msg: 'ok' })
       })
       .catch(error => {
         console.error(error)
