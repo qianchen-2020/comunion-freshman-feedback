@@ -3,7 +3,10 @@
 @tailwind utilities;
 
 body {
-  @apply max-w-full lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl p-4 xl:px-8 text-gray-900;
+}
+
+#app {
+  @apply mx-auto max-w-full lg:max-w-2xl xl:max-w-4xl p-4 xl:px-8 text-gray-900;
 }
 
 h3 {

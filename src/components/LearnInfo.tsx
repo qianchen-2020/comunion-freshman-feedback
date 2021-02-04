@@ -1,4 +1,5 @@
 import { defineComponent } from 'vue'
+import useScrollTop from '../hooks/useScrollTop'
 
 export default defineComponent({
   name: 'LearnInfo',
@@ -6,6 +7,7 @@ export default defineComponent({
     onDone: Function
   },
   setup(props) {
+    useScrollTop()
     return () => (
       <div class="mt-4">
         <h3>1.欢迎来到 Comunion DAOist 申请页</h3>
@@ -34,6 +36,7 @@ export default defineComponent({
         <br />
         <p>我们开始彼此连接，用行动打破规则</p>
         <p>如果你也是想成为一名DAO士，欢迎加入我们</p>
+        <br />
 
         <h3>2.首先来了解一些基础理论</h3>
         <p>
@@ -73,6 +76,7 @@ export default defineComponent({
         <p>降低创业门槛</p>
         <p>降低贫富差距</p>
         <p>打破阶层固化</p>
+        <br />
 
         <h3>3.阅读内容，便于更好的了解我们</h3>
         <p>
@@ -176,6 +180,7 @@ export default defineComponent({
           imToken钱包安装、使用教程：
           <a href="https://bbs.comunion.io/d/273-imtoken">https://bbs.comunion.io/d/273-imtoken</a>
         </p>
+        <br />
 
         <h3>4.协作相关：</h3>
         <p>
@@ -194,7 +199,7 @@ export default defineComponent({
           Github：<a href="https://github.com/comunion-io/">https://github.com/comunion-io/</a>
         </p>
         <p>
-          产品测试地址：<a href="https://dev.comunion.io/">https://cos-front-com.vercel.app/</a>
+          产品测试地址：<a href="https://dev.comunion.io/">https://dev.comunion.io/</a>
         </p>
         <br />
         <p>

@@ -4,6 +4,6 @@ export default defineComponent({
   name: 'Done',
   props: {},
   setup() {
-    return () => <div>欢迎您加入Comunion！</div>
+    return () => <div class="py-24 text-center text-2xl text-blue-500">欢迎您加入Comunion！</div>
   }
 })

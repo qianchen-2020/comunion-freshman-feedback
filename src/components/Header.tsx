@@ -6,10 +6,10 @@ export default defineComponent({
   props: {},
   setup() {
     return () => (
-      <div>
+      <>
         <h1 class="mb-4 text-gray-600 text-center text-2xl">Comunion Economics</h1>
-        <img class="max-width-full" src={HeaderImage} />
-      </div>
+        <img class="max-h-64 w-full object-cover" src={HeaderImage} />
+      </>
     )
   }
 })

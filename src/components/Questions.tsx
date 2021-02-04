@@ -1,5 +1,6 @@
 import { defineComponent, reactive } from 'vue'
 import questions from '../data/questions'
+import useScrollTop from '../hooks/useScrollTop'
 
 const choiceChars = ['A', 'B', 'C', 'D']
 
@@ -9,6 +10,7 @@ export default defineComponent({
     onDone: Function
   },
   setup(props) {
+    useScrollTop()
     const multipleChoices = reactive(Array<number[]>(questions.multiple.length).fill([]))
     const singleChoices = reactive(Array<number | null>(questions.single.length).fill(null))
 
@@ -26,18 +28,17 @@ export default defineComponent({
       }
       if (window.confirm('确认不再检查一遍了么？')) {
         try {
-          // const resp = await fetch('/api/answer', {
-          //   method: 'POST',
-          //   headers: {
-          //     Accept: 'application/json',
-          //     'Content-Type': 'application/json'
-          //   },
-          //   body: JSON.stringify({ multiple: multipleChoices, single: singleChoices })
-          // })
-          // const { score, passed } = await resp.json()
-          // alert((passed ? `😃 恭喜通过新人考核!` : '🤭 抱歉，你并没有通过新人考核！') + `得分：${score}`)
-          // passed && props.onDone?.(score)
-          props.onDone?.(1)
+          const resp = await fetch('/api/answer', {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ multiple: multipleChoices, single: singleChoices })
+          })
+          const { score, passed } = await resp.json()
+          alert((passed ? `😃 恭喜通过新人考核!` : '🤭 抱歉，你并没有通过新人考核！') + `得分：${score}`)
+          passed && props.onDone?.(score)
         } catch (error) {
           console.error(error)
           alert('请求错误')
