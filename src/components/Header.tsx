@@ -1,5 +1,5 @@
 import { defineComponent } from 'vue'
-import HeaderImage from '../assets/header.png'
+import HeaderImage from '../assets/header.jpg'
 
 export default defineComponent({
   name: 'Header',
