@@ -1,10 +1,10 @@
 import sgMail from '@sendgrid/mail'
 import { NowRequest, NowResponse } from '@vercel/node'
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+sgMail.setApiKey(process.env.SENDGRID_API_KEY!)
 
 export default function (req: NowRequest, res: NowResponse) {
-  if (req.method.toUpperCase() === 'POST') {
+  if (req.method?.toUpperCase() === 'POST') {
     const { mentor, nickname, score, shimo, taiga, yapi, github, wallet } = req.body
     sgMail
       .send({

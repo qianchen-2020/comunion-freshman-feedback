@@ -5,13 +5,22 @@ export default defineComponent({
   props: {
     disabled: Boolean,
     loading: Boolean,
+    type: {
+      type: String as PropType<'submit' | 'reset'>
+    },
     onClick: {
       type: Function as PropType<(e: Event) => void>
     }
   },
   setup(props, ctx) {
     return () => (
-      <button disabled={props.disabled || props.loading} class="btn inline-flex" onClick={props.onClick} {...ctx.attrs}>
+      <button
+        disabled={props.disabled || props.loading}
+        class="btn inline-flex"
+        type={props.type}
+        onClick={props.onClick}
+        {...ctx.attrs}
+      >
         {props.loading && (
           <svg
             class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
