@@ -38,11 +38,11 @@ export default defineComponent({
     return () => (
       <form onSubmit={onSubmit}>
         <label class="block">
-          <span class="text-gray-700">您的昵称</span>
+          <span class="text-gray-700">你的昵称</span>
           <input type="text" required class="rounded mt-1 block w-full" v-model={form.nickname} />
         </label>
         <label class="mt-4 block">
-          <span class="text-gray-700">您的Mentor</span>
+          <span class="text-gray-700">你的Mentor</span>
           {/* <select required class="rounded mt-1 block w-full" v-model={form.mentor}>
             {mentors.map(name => (
               <option key={name[0]}>{name[0]}</option>
