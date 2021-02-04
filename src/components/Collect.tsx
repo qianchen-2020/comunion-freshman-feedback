@@ -2,6 +2,7 @@ import { defineComponent, reactive, ref } from 'vue'
 import useScrollTop from '../hooks/useScrollTop'
 // import mentors from '../data/mentors'
 import { post } from '../utils/request'
+import Button from './Button'
 
 export default defineComponent({
   name: 'CollectForm',
@@ -31,8 +32,6 @@ export default defineComponent({
       loading.value = false
       if (resp) {
         props.onDone?.()
-      } else {
-        alert('信息提交失败')
       }
     }
 
@@ -110,9 +109,9 @@ export default defineComponent({
           <input type="text" required class="rounded mt-1 block w-full" v-model={form.wallet} placeholder="0x..." />
         </label>
         <div class="mt-4 text-right">
-          <button disabled={loading.value} class="btn" type="submit">
+          <Button loading={loading.value} class="btn" type="submit">
             🧐&nbsp;&nbsp;填写完毕，马上提交
-          </button>
+          </Button>
         </div>
       </form>
     )

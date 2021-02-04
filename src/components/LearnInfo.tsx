@@ -1,5 +1,6 @@
 import { defineComponent } from 'vue'
 import useScrollTop from '../hooks/useScrollTop'
+import Button from './Button'
 
 export default defineComponent({
   name: 'LearnInfo',
@@ -228,9 +229,7 @@ export default defineComponent({
           Wiki：<a href="https://wiki.comunion.io/">https://wiki.comunion.io/</a>
         </p>
         <div class="mt-4 text-right">
-          <button class="btn" onClick={() => props.onDone?.()}>
-            😀&nbsp;&nbsp;学习完成，进入考核
-          </button>
+          <Button onClick={() => props.onDone?.()}>😀&nbsp;&nbsp;学习完成，进入考核</Button>
         </div>
       </div>
     )

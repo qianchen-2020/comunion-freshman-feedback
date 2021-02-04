@@ -2,6 +2,7 @@ import { defineComponent, reactive, ref } from 'vue'
 import questions from '../data/questions'
 import useScrollTop from '../hooks/useScrollTop'
 import { post } from '../utils/request'
+import Button from './Button'
 
 const choiceChars = ['A', 'B', 'C', 'D']
 
@@ -37,8 +38,6 @@ export default defineComponent({
           const { score, passed } = resp
           alert((passed ? `😃 恭喜通过新人考核!` : '🤭 抱歉，你并没有通过新人考核！') + `得分：${score}`)
           passed && props.onDone?.(score)
-        } else {
-          alert('请求错误')
         }
       }
     }
@@ -46,7 +45,7 @@ export default defineComponent({
     return () => (
       <div class="mt-4">
         <h3>新人答题：</h3>
-        <form>
+        <form onSubmit={onFinish}>
           <p class="mb-2 p-2 text-lg bg-blue-300 text-white border-l-2 border-blue-500">多选题</p>
           {questions.multiple.map((question, index) => (
             <div key={index} class="mb-4">
@@ -84,9 +83,9 @@ export default defineComponent({
             </div>
           ))}
           <div class="mt-4 text-right">
-            <button disabled={loading.value} class="btn" onClick={onFinish}>
+            <Button loading={loading.value} type="submit">
               🧐&nbsp;&nbsp;填写完毕，提交答卷
-            </button>
+            </Button>
           </div>
         </form>
       </div>
