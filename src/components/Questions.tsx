@@ -49,7 +49,7 @@ export default defineComponent({
           <p class="mb-2 p-2 text-lg bg-blue-300 text-white border-l-2 border-blue-500">多选题</p>
           {questions.multiple.map((question, index) => (
             <div key={index} class="mb-4">
-              <p class="text-base">
+              <p class="text-base font-medium">
                 ✍🏻&nbsp;&nbsp;{index + 1}. {question.title}
               </p>
               <div class="mt-2">
@@ -67,7 +67,7 @@ export default defineComponent({
           <p class="mb-2 p-2 text-lg bg-blue-300 text-white border-l-2 border-blue-500">单选题</p>
           {questions.single.map((question, index) => (
             <div key={index} class="mb-4">
-              <p class="text-base">
+              <p class="text-base font-medium">
                 ✍🏻&nbsp;&nbsp;{index + 1}. {question.title}
               </p>
               <div class="mt-2">
