@@ -1,8 +1,10 @@
-// [[正确索引, 得分]：如 [[1, 2]] [[[1, 2, 3], 2]]
-const multipleAnswers = JSON.parse(process.env.MULTIPLE_ANSWERS)
-const singleAnswers = JSON.parse(process.env.SINGLE_ANSWERS)
+import { NowRequest, NowResponse } from '@vercel/node'
 
-module.exports = (req, res) => {
+// [[正确索引, 得分]：如 [[1, 2]] [[[1, 2, 3], 2]]
+const multipleAnswers: [number[], number][] = JSON.parse(process.env.MULTIPLE_ANSWERS)
+const singleAnswers: [number, number][] = JSON.parse(process.env.SINGLE_ANSWERS)
+
+export default function (req: NowRequest, res: NowResponse) {
   if (req.method.toUpperCase() === 'POST') {
     const { multiple, single } = req.body
     let score = 0

@@ -1,6 +1,7 @@
-import { defineComponent, reactive } from 'vue'
+import { defineComponent, reactive, ref } from 'vue'
 import questions from '../data/questions'
 import useScrollTop from '../hooks/useScrollTop'
+import { post } from '../utils/request'
 
 const choiceChars = ['A', 'B', 'C', 'D']
 
@@ -13,6 +14,8 @@ export default defineComponent({
     useScrollTop()
     const multipleChoices = reactive(Array<number[]>(questions.multiple.length).fill([]))
     const singleChoices = reactive(Array<number | null>(questions.single.length).fill(null))
+
+    const loading = ref(false)
 
     async function onFinish(e: Event) {
       e.preventDefault()
@@ -27,20 +30,14 @@ export default defineComponent({
         if (!confirmed) return
       }
       if (window.confirm('确认不再检查一遍了么？')) {
-        try {
-          const resp = await fetch('/api/answer', {
-            method: 'POST',
-            headers: {
-              Accept: 'application/json',
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ multiple: multipleChoices, single: singleChoices })
-          })
-          const { score, passed } = await resp.json()
+        loading.value = true
+        const resp = await post('/api/answer', { multiple: multipleChoices, single: singleChoices })
+        loading.value = false
+        if (resp) {
+          const { score, passed } = resp
           alert((passed ? `😃 恭喜通过新人考核!` : '🤭 抱歉，你并没有通过新人考核！') + `得分：${score}`)
           passed && props.onDone?.(score)
-        } catch (error) {
-          console.error(error)
+        } else {
           alert('请求错误')
         }
       }
@@ -87,7 +84,7 @@ export default defineComponent({
             </div>
           ))}
           <div class="mt-4 text-right">
-            <button class="btn" onClick={onFinish}>
+            <button disabled={loading.value} class="btn" onClick={onFinish}>
               🧐&nbsp;&nbsp;填写完毕，提交答卷
             </button>
           </div>

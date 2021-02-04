@@ -1,4 +1,4 @@
-import { defineComponent, reactive } from 'vue'
+import { defineComponent, reactive, ref } from 'vue'
 import useScrollTop from '../hooks/useScrollTop'
 // import mentors from '../data/mentors'
 import { post } from '../utils/request'
@@ -20,12 +20,16 @@ export default defineComponent({
       github: '',
       wallet: ''
     })
+    const loading = ref(false)
 
     // const isTechMentor = form.mentor ? mentors.find(mentor => mentor[0] === form.mentor)?.[1] ?? false : false
 
     async function onSubmit(e: Event) {
       e.preventDefault()
-      if (await post('/api/collect', { ...form, score: props.score })) {
+      loading.value = true
+      const resp = await post('/api/collect', { ...form, score: props.score })
+      loading.value = false
+      if (resp) {
         props.onDone?.()
       } else {
         alert('信息提交失败')
@@ -106,7 +110,7 @@ export default defineComponent({
           <input type="text" required class="rounded mt-1 block w-full" v-model={form.wallet} placeholder="0x..." />
         </label>
         <div class="mt-4 text-right">
-          <button class="btn" type="submit">
+          <button disabled={loading.value} class="btn" type="submit">
             🧐&nbsp;&nbsp;填写完毕，马上提交
           </button>
         </div>
