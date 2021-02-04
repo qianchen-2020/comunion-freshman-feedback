@@ -21,7 +21,7 @@ export default defineComponent({
     async function onFinish(e: Event) {
       e.preventDefault()
       const multipleEmpty = multipleChoices.filter(choice => !choice.length).length
-      const singleEmpty = singleChoices.filter(choice => !choice).length
+      const singleEmpty = singleChoices.filter(choice => choice !== null).length
       if (multipleEmpty || singleEmpty) {
         const confirmed = window.confirm(
           `你还有${multipleEmpty ? `${multipleEmpty}道多选题` : ''}${
