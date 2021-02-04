@@ -5,7 +5,7 @@ const multipleAnswers: [number[], number][] = JSON.parse(process.env.MULTIPLE_AN
 const singleAnswers: [number, number][] = JSON.parse(process.env.SINGLE_ANSWERS!)
 
 export default function (req: NowRequest, res: NowResponse) {
-  if (req.method?.toUpperCase() === 'POST') {
+  if (req.method!.toUpperCase() === 'POST') {
     const { multiple, single } = req.body
     let score = 0
     for (const [index, answer] of multipleAnswers.entries()) {
