@@ -16,13 +16,13 @@ export default function (req: NowRequest, res: NowResponse) {
       })
       .then(() => {
         console.log('Email sent')
-        res.status(200)
+        res.status(200).end()
       })
       .catch(error => {
         console.error(error)
-        res.status(500)
+        res.status(500).send(error)
       })
   } else {
-    res.send('')
+    res.status(405).end()
   }
 }

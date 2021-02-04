@@ -20,6 +20,6 @@ export default function (req: NowRequest, res: NowResponse) {
     }
     res.json({ score, passed: score > 70 })
   } else {
-    res.send('')
+    res.status(405).end()
   }
 }
