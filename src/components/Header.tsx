@@ -7,7 +7,7 @@ export default defineComponent({
   setup() {
     return () => (
       <>
-        <h1 class="mb-4 text-gray-600 text-center text-2xl">Comunion Economics</h1>
+        <h1 class="mb-4 text-gray-600 text-center font-medium text-4xl">Comunion Economics</h1>
         <img class="max-h-64 w-full object-cover" src={HeaderImage} />
       </>
     )
