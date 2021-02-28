@@ -7,7 +7,7 @@ export default function (req: NowRequest, res: NowResponse) {
   if (req.method!.toUpperCase() === 'POST') {
     const { mentor, nickname, score, shimo, taiga, yapi, github, wallet } = req.body
     const cc = ['utakata9408@163.com', 'yanshuai110@163.com']
-    let ccFoundIndex = cc.findIndex(mentor)
+    const ccFoundIndex = cc.indexOf(mentor)
     if (ccFoundIndex > -1) {
       cc.splice(ccFoundIndex, 1)
     }
