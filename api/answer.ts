@@ -1,12 +1,10 @@
 import { NowRequest, NowResponse } from '@vercel/node'
-
-// [[正确索引, 得分]：如 [[1, 2]] [[[1, 2, 3], 2]]
-const multipleAnswers: [number[], number][] = JSON.parse(process.env.MULTIPLE_ANSWERS!)
-const singleAnswers: [number, number][] = JSON.parse(process.env.SINGLE_ANSWERS!)
+import { MultipleChoices, SingleChoices } from '../types'
+import { multipleAnswers, singleAnswers } from '../helper/answer'
 
 export default function (req: NowRequest, res: NowResponse) {
   if (req.method!.toUpperCase() === 'POST') {
-    const { multiple, single } = req.body
+    const { multiple, single } = req.body as { multiple: MultipleChoices; single: SingleChoices }
     let score = 0
     for (const [index, answer] of multipleAnswers.entries()) {
       if (answer[0].length === multiple[index].length && answer[0].every(item => multiple[index].indexOf(item) > -1)) {

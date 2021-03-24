@@ -1,13 +1,20 @@
-import { defineComponent, reactive, ref } from 'vue'
+import { defineComponent, PropType, reactive, ref } from 'vue'
 import useScrollTop from '../hooks/useScrollTop'
 // import mentors from '../data/mentors'
 import { post } from '../utils/request'
 import Button from './Button'
+import { MultipleChoices, SingleChoices } from '../../types'
 
 export default defineComponent({
   name: 'CollectForm',
   props: {
     score: Number,
+    multipleChoices: {
+      type: Array as PropType<MultipleChoices>
+    },
+    singleChoices: {
+      type: Array as PropType<SingleChoices>
+    },
     onDone: Function
   },
   setup(props) {
@@ -28,7 +35,12 @@ export default defineComponent({
     async function onSubmit(e: Event) {
       e.preventDefault()
       loading.value = true
-      const resp = await post('/api/collect', { ...form, score: props.score })
+      const resp = await post('/api/collect', {
+        ...form,
+        score: props.score,
+        multipleChoices: props.multipleChoices,
+        singleChoices: props.singleChoices
+      })
       loading.value = false
       if (resp) {
         props.onDone?.()

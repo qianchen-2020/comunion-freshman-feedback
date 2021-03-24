@@ -3,6 +3,7 @@ import questions from '../data/questions'
 import useScrollTop from '../hooks/useScrollTop'
 import { post } from '../utils/request'
 import Button from './Button'
+import { MultipleChoices, SingleChoices } from '../../types'
 
 const choiceChars = ['A', 'B', 'C', 'D']
 
@@ -13,8 +14,8 @@ export default defineComponent({
   },
   setup(props) {
     useScrollTop()
-    const multipleChoices = reactive(Array<number[]>(questions.multiple.length).fill([]))
-    const singleChoices = reactive(Array<number | null>(questions.single.length).fill(null))
+    const multipleChoices = reactive(Array<MultipleChoices[number]>(questions.multiple.length).fill([]))
+    const singleChoices = reactive(Array<SingleChoices[number]>(questions.single.length).fill(null))
 
     const loading = ref(false)
 
@@ -37,7 +38,7 @@ export default defineComponent({
         if (resp) {
           const { score, passed } = resp
           alert((passed ? `😃 恭喜通过新人考核!` : '🤭 抱歉，你并没有通过新人考核！') + `得分：${score}`)
-          passed && props.onDone?.(score)
+          passed && props.onDone?.(score, multipleChoices, singleChoices)
         }
       }
     }
