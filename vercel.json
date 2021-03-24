@@ -1,0 +1,3 @@
+{
+  "includeFiles": "{api/*.ts,helper/*.ts,assets/*.*,types/*.ts}"
+}
