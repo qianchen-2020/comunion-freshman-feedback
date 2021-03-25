@@ -3,7 +3,7 @@ import questions from '../data/questions'
 import useScrollTop from '../hooks/useScrollTop'
 import { post } from '../utils/request'
 import Button from './Button'
-import { MultipleChoices, SingleChoices } from '../../types'
+import { MultipleChoices, SingleChoices } from '../types'
 
 const choiceChars = ['A', 'B', 'C', 'D']
 

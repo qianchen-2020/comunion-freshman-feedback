@@ -1,6 +1,6 @@
 import { NowRequest, NowResponse } from '@vercel/node'
-import { MultipleChoices, SingleChoices } from '../types'
-import { multipleAnswers, singleAnswers } from '../helper/answer'
+import { MultipleChoices, SingleChoices } from './types'
+import { multipleAnswers, singleAnswers } from './answers'
 
 export default function (req: NowRequest, res: NowResponse) {
   if (req.method!.toUpperCase() === 'POST') {

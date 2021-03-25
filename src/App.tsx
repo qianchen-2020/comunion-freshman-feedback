@@ -4,7 +4,7 @@ import Done from './components/Done'
 import Header from './components/Header'
 import Questions from './components/Questions'
 import LearnInfo from './components/LearnInfo'
-import { MultipleChoices, SingleChoices } from '../types'
+import { MultipleChoices, SingleChoices } from './types'
 
 export default defineComponent({
   name: 'App',
@@ -13,21 +13,24 @@ export default defineComponent({
     const collectVisible = ref(false)
     const done = ref(false)
     const choices = ref<[MultipleChoices, SingleChoices]>([[], []])
-
     const score = ref(0)
+    const pdf = ref('')
 
     return () => (
       <>
         <Header />
         {(() => {
-          if (done.value) return <Done />
+          if (done.value) return <Done pdf={pdf.value} />
           if (collectVisible.value)
             return (
               <Collect
                 score={score.value}
                 multipleChoices={choices.value[0]}
                 singleChoices={choices.value[1]}
-                onDone={() => (done.value = true)}
+                onDone={(_pdf: string) => {
+                  done.value = true
+                  pdf.value = _pdf
+                }}
               />
             )
           if (learned.value)

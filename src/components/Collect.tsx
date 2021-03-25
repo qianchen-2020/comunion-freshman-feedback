@@ -3,7 +3,7 @@ import useScrollTop from '../hooks/useScrollTop'
 // import mentors from '../data/mentors'
 import { post } from '../utils/request'
 import Button from './Button'
-import { MultipleChoices, SingleChoices } from '../../types'
+import { MultipleChoices, SingleChoices } from '../types'
 
 export default defineComponent({
   name: 'CollectForm',
@@ -22,7 +22,7 @@ export default defineComponent({
     const form = reactive({
       nickname: '',
       mentor: '',
-      shimo: '',
+      yuque: '',
       taiga: '',
       yapi: '',
       github: '',
@@ -42,8 +42,8 @@ export default defineComponent({
         singleChoices: props.singleChoices
       })
       loading.value = false
-      if (resp) {
-        props.onDone?.()
+      if (resp.ok) {
+        props.onDone?.(resp.pdf)
       }
     }
 
@@ -70,12 +70,12 @@ export default defineComponent({
         </label>
         <label class="mt-4 block">
           <span class="text-gray-700">
-            石墨文档（文档共享）账号，
-            <a target="_blank" href="https://shimo.im/desktop">
+            语雀账号（文档共享），
+            <a target="_blank" href="https://www.yuque.com/">
               前往注册
             </a>
           </span>
-          <input type="text" required class="rounded mt-1 block w-full" v-model={form.shimo} />
+          <input type="text" required class="rounded mt-1 block w-full" v-model={form.yuque} />
         </label>
         <label class="mt-4 block">
           <span class="text-gray-700">

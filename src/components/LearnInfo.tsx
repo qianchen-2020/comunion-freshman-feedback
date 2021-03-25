@@ -178,7 +178,7 @@ export default defineComponent({
           <strong>账号注册</strong>
         </p>
         <p>
-          <a href="https://shimo.im/space/zvk9d8DwGGiGsnq2">石墨文档（文档共享）</a>
+          <a href="https://comunion.yuque.com/dashboard">语雀文档（文档共享）</a>
         </p>
         <p>
           <a href="https://taiga.comunion.io/">Taiga（任务/Bug管理）</a>

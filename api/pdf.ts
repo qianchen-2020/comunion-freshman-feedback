@@ -1,9 +1,8 @@
 import PDFDocument = require('pdfkit')
-import { Base64Decode } from 'base64-stream'
 import { join } from 'path'
-import { MultipleChoices, SingleChoices } from '../types'
-import { multipleAnswers, singleAnswers } from './answer'
-import questions from '../src/data/questions'
+import { MultipleChoices, SingleChoices } from './types'
+import { multipleAnswers, singleAnswers } from './answers'
+import questions from './questions'
 
 const gray = '#999'
 const headColor = '#000'
@@ -22,13 +21,16 @@ function printChoice(
   isChecked: boolean,
   isAnswer: boolean
 ): PDFKit.PDFDocument {
-  return doc
-    .text(`${space}${indexChars[index]}: ${isChecked ? '◉' : space} [${isAnswer ? ' ✓ ' : `${space} `}] `, {
-      continued: true
-    })
-    .fillColor(isChecked === isAnswer ? rightColor : wrongColor)
-    .text(title)
-    .fillColor(contentColor)
+  return (
+    doc
+      .text(`${space}${indexChars[index]}: ${isChecked ? '◉' : space} [${isAnswer ? ' ✓ ' : `${space} `}] `, {
+        continued: true
+      })
+      // 正确的选择用绿色，错误的选择用红色，没选择的非答案项正常显示
+      .fillColor(isChecked === isAnswer ? (isAnswer ? rightColor : contentColor) : wrongColor)
+      .text(title)
+      .fillColor(contentColor)
+  )
 }
 
 export function generatePDF(
@@ -38,9 +40,8 @@ export function generatePDF(
   singleChoices: SingleChoices
 ): Promise<string> {
   const doc = new PDFDocument()
-  const stream = doc.pipe(new Base64Decode())
   doc
-    .font(join(__dirname, '../assets/SourceHanSansCN Medium.ttf'))
+    .font(join(__dirname, './SourceHanSansCN Medium.ttf'))
     // 标题
     .fontSize(18)
     .fillColor(headColor)
@@ -81,10 +82,10 @@ export function generatePDF(
   })
   doc.end()
   return new Promise(resolve => {
-    let content = ''
-    stream.on('data', chunk => {
-      content += chunk
+    const buffers: Uint8Array[] = []
+    doc.on('data', buffers.push.bind(buffers))
+    doc.on('end', () => {
+      resolve(Buffer.concat(buffers).toString('base64'))
     })
-    stream.on('end', () => resolve(content))
   })
 }
