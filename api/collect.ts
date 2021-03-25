@@ -38,7 +38,7 @@ async function sendMail(data: RequestData) {
       attachments: [
         {
           content: pdfContent,
-          filename: `${nickname}的答题报告`,
+          filename: `${nickname}的答题报告.pdf`,
           type: 'application/pdf',
           disposition: 'attachment'
         }

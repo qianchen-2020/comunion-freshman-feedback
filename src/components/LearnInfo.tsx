@@ -11,8 +11,8 @@ export default defineComponent({
     useScrollTop()
     return () => (
       <div class="mt-4">
-        <h3>1.欢迎来到 Comunion DAOist 申请页</h3>
-        <p>我们是一群DAO士(DAOist)</p>
+        <h3>1.欢迎来到 Comunion Comer 申请页</h3>
+        <p>我们是一群Comer</p>
         <p>生于平凡，披星戴月</p>
         <p>身怀绝技，仍艰难度日</p>
         <p>不甘平庸，但被套上了阶层的枷锁</p>
@@ -97,7 +97,7 @@ export default defineComponent({
           <strong>理论介绍:</strong>
         </p>
         <p>
-          <a href="https://bbs.comunion.io/d/325-comunion-economics">网链经济学（(Comunion Economics)</a>
+          <a href="https://bbs.comunion.io/d/325-comunion-economics">网链经济学(Comunion Economics)</a>
         </p>
         <p>
           <a href="https://bbs.comunion.io/d/292-comunion-economic">网链经济白皮书</a>
