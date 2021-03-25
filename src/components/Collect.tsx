@@ -42,9 +42,8 @@ export default defineComponent({
         singleChoices: props.singleChoices
       })
       loading.value = false
-      if (resp.ok) {
-        props.onDone?.(resp.pdf)
-      }
+      console.log(resp)
+      props.onDone?.(resp.pdf)
     }
 
     return () => (
